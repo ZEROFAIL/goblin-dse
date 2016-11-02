@@ -1,0 +1,4 @@
+goblin
+pytest
+pytest-asyncio
+pytest-cov
