@@ -1,8 +1,14 @@
-import functools
-import operator
+def _hash(val):
+    if isinstance(val, dict):
+        result = 0
+        for key, value in val.items():
+            result += _hash((key, _hash(value)))
+        return result
+    else:
+        return hash(val)
 
 
-def get_id_hash(id_dict):
-    hashes = map(hash, id_dict.items())
-    id_hash = functools.reduce(operator.xor, hashes, 0)
-    return id_hash
+def dse_get_hashable_id(val):
+    if isinstance(val, dict):
+        return _hash(val)
+    return val
